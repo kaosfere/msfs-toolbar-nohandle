@@ -1,0 +1,86 @@
+﻿/** This mixin makes a single line element fit exactly on the Roboto font for easier integration. */
+tool-bar {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: calc(var(--screenHeight) * (40px / 2160));
+  box-sizing: border-box;
+}
+
+tool-bar:not(.active) {
+  width: calc(var(--screenHeight) * (700px / 2160));
+  height: calc(var(--screenHeight) * (140px / 2160));
+}
+
+tool-bar:not(.active) .toolbar-list {
+  display: none;
+}
+
+tool-bar .toolbar-handle {
+  height: calc(var(--screenHeight) * (90px / 2160));
+  display: flex;
+  justify-content: center;
+  padding-top: calc(var(--screenHeight) * (50px / 2160));
+  min-width: calc(var(--screenHeight) * (600px / 2160));
+  width: 100%;
+  opacity: 0;
+  transition: opacity 3s;
+}
+
+tool-bar .toolbar-handle.visible,
+tool-bar .toolbar-handle.active {
+  transition: opacity .7s 0s;
+  opacity: 0;
+}
+
+tool-bar .toolbar-handle.active:after {
+  width: 100%;
+}
+
+tool-bar .toolbar-handle.active .toolbar-arrow {
+  transform: rotate(180deg);
+  top: 0;
+}
+
+tool-bar .toolbar-handle:after {
+  content: '';
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.3), white, rgba(255, 255, 255, 0.3));
+  display: block;
+  position: absolute;
+  z-index: 2;
+  width: calc(var(--screenHeight) * (442px / 2160));
+  height: calc(var(--screenHeight) * (6px / 2160));
+  transition: width .3s ease-out;
+}
+
+tool-bar .toolbar-handle .toolbar-arrow {
+  display: inline-block;
+  height: 0;
+  width: 0;
+  position: relative;
+  top: calc(var(--screenHeight) * (6px / 2160));
+  border-top: calc(var(--screenHeight) * (35px / 2160)) solid white;
+  border-right: calc(var(--screenHeight) * (27px / 2160)) solid transparent;
+  border-left: calc(var(--screenHeight) * (27px / 2160)) solid transparent;
+  -coherent-layer-clip-aa: on;
+  transform-origin: 50% 0%;
+}
+
+tool-bar .toolbar-list {
+  z-index: 3;
+  display: flex;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .15s, margin-top .3s;
+}
+
+tool-bar .toolbar-list.visible {
+  transition: opacity .15s .2s, margin-top .3s;
+  pointer-events: auto;
+  opacity: 1;
+}
