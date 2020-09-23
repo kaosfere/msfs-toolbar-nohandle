@@ -2,7 +2,7 @@
 
 This repository is meant to serve two purposes:  as the source for a mod to remove the annoying "handle" for the toolbar that appears in Microsoft Flight Simulator when the mouse moves while you're flying; and as a bit of a tutorial for the MSFS modding community on how to create a mod that stands the best chance of not conflicting with others or breaking on future updates.
 
-If you are just looking for the mod, go to the [releases page]() to download it and be happy.
+If you are just looking for the mod, go to the [releases page](https://github.com/kaosfere/msfs-toolbar-nohandle/releases) to download it and be happy.
 
 But if you want to know a bit more about why I created this, and maybe learn a bit about MSFS or software engineering in general, read on for a discussion of the original mod and what I've done to it.
 
@@ -22,11 +22,11 @@ Second, the fact that I am writing this is in **no way** meant to criticize or d
 
 I think most folks in the modding community have a basic understanding of the MSFS filesystem, but it pays to have a little more than a basic understanding, so here's a crash course.
 
-The basic unit of content is a "package".   There are the directories that live on your `Community` folder, or the `Official` one.  Each package has at its top level two files, a `layout.json`, and a `manifest.json`, and a collection of directories under it.  If you're familiar with the FSX or P3D directory structure you may recognize some of these, especially `SimObjects`.
+The basic unit of content is a "package".   There are the directories that live in your `Community` folder, or the `Official` one.  Each package has at its top level two files, a `layout.json`, and a `manifest.json`, and a collection of directories under it.  If you're familiar with the FSX or P3D directory structure you may recognize some of these, especially `SimObjects`.
 
 When the game starts it builds a virtual filesystem (VFS) by reading everything in the `Official` packages.  It then reads the packages in `Community` in alphabetical order by directory name. For every package it reads the `layout.json` to learn about the contents of the package and adds every file named in there to its VFS.   It essentially "layers" the packages on top of one another in the order it reads them.   A file in a given package later in the order will overwrite a file in the same location in an earlier package.
 
-The main thing to note here is that is unnecessary to include "extra" files that you don't use in a mod.  You only need to package the ones you modify and add, and leave the rest alone.
+The main thing to note here is that is unnecessary to include "extra" files that you don't use in a mod.  You only need to package the ones you modify or add, and leave the rest alone.
 
 (There's also some confusion in places about what the metadata files in a package should look like.  For a side note on that, have a look at [this additional document](package_metadata.md))
 
@@ -95,9 +95,9 @@ This is all it takes.
 
 ## The Effect
 
-So, what does making the mod in this fashion do?   It means that other people can make changes to the javascript or HTML of the toolbar without us masking it.  It also means that updating this mod for future game versions that change this should be very easy -- we know exactly what we changed, and that it only happened at one point.  We can simply update our CSS to work with whatever new HTML we have and we should be good to go. 
+So, what does making the mod in this fashion do?   It means that other people can make changes to the javascript or HTML of the toolbar without us masking it.  It also means that updating this mod for future game versions that change the toolbar should be very easy -- we know exactly what we changed, and that it only happened at one point.  We can simply update our CSS to work with whatever new HTML we have and we should be good to go. 
 
-It *does* mean that any upstream changes to `ToolBar.html` itself will be masked by our mod, but that's just a fact of life of modding:  you must hook your code in at some point so there's always going to be an interface that can break.  It's just a matter of making fixing it as easy as possible.  In this case, as long as our CSS is updated, we can very simply bring the mod up to date with future game versions by pulling in the updated `ToolBar.html` and adding just that one line to include our CSS.  Tada!
+It *does* mean that any upstream changes to `ToolBar.html` itself will be masked by our mod, but that's just a fact of life of modding:  you must hook your code in at *some* point so there's always going to be an interface that can break.  It's just a matter of making fixing it as easy as possible.  In this case, as long as our CSS is updated, we can very simply bring the mod up to date with future game versions by pulling in the updated `ToolBar.html` and adding just that one line to include our CSS.  Tada!
 
 ## In Summary
 
