@@ -63,7 +63,7 @@ It just changes the opacity of those two elements.
 
 ## Shortcomings
 
-What are the flaws with doing it in this way?  The main one is that this, effectively, completely obliterates the toolbar as it was shipped with the game and replaces it with an almost identical copy.  While this was fine at first, when the update to game version 1.8 came and brought changes to all three files in that directory on order to add support for the active pause menu item... they were completely lost for anyone who had the mod installed.
+What are the flaws with doing it in this way?  The main one is that this, effectively, completely obliterates the toolbar as it was shipped with the game and replaces it with an almost identical copy.  While this was fine at first, when the update to game version 1.8 came and brought changes to all three files in that directory in order to add support for the active pause menu item... they were completely lost for anyone who had the mod installed.
 
 Beyond that, shipping files that you do not need to include means that you are almost guaranteed to conflict with any other mod that's changing anything in that area.  In this case, if someone had created a small mod that altered, say, the javascript used for the toolbar, and this mod came last in the load order, this mod would totally mask the other one.  An additional shortcoming is that this makes porting in upstream changes more challenging:  I had to carefully examine a three-way diff between this version, the 1.7 version, and the 1.8 version to figure out what would need to change to "port" the mod to the new game version, and this is for a simple three-file mod.
 
